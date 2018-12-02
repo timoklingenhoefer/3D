@@ -11,7 +11,7 @@ public class Vektor {
     }
 
     public Vektor normalize(){
-        double length = Math.sqrt(Math.pow(a0, 2) + Math.pow(a1, 3) + Math.pow(a2, 2));
+        double length = Math.sqrt(Math.pow(Math.abs(a0), 2) + Math.pow(Math.abs(a1), 3) + Math.pow(Math.abs(a2), 2));
         return new Vektor(a0/length, a1/length, a2/length);
     }
 
