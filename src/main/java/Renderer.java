@@ -1,13 +1,12 @@
-import org.ejml.data.DMatrix4x4;
+import geometry.*;
 
-import static org.ejml.dense.fixed.CommonOps_DDF4.invert;
-import static org.ejml.dense.fixed.CommonOps_DDF4.transpose;
+import static geometry.Matrix.createCameraToWorldMatrix;
+import static geometry.Vektor.crossproduct;
+import static geometry.Vektor.subtract;
 
 public class Renderer {
 
     public static void main(String[] args){
-        DMatrix4x4 mat = new DMatrix4x4();
-        DMatrix4x4 copy = mat.copy();
 //        new DMatrix4x4(rightX,rightY,rightZ,0,
 //                upX,upY,upZ,0,
 //                forwardX,forwardY,forwardZ,0,
@@ -18,12 +17,20 @@ public class Renderer {
         //                  Vec3f right = crossProduct(Normalize(tmp), forward);
         //up Vektor:        Vec3f up = crossProduct(forward, right);
         //translation: Koordinaten from
-
-        invert(mat,mat);
-        transpose(copy);
-        mat.print();
-        copy.print();
         //orthogonale matrix: transposition = inversion
+        System.out.println(crossproduct(new Vektor(1,2,3), new Vektor(-7,8,9)));
+    }
 
+    private Matrix lookAt(Vektor from, Vektor to, Vektor tmp){
+        //TODO: fix vertikal Camera
+        Vektor forward = subtract(from, to).normalize();
+        Vektor right = crossproduct(tmp.normalize(), forward);
+        Vektor up = crossproduct(forward, right);
+        return createCameraToWorldMatrix(from, forward, right, up);
+    }
+
+    private Matrix lookAt(Vektor from, Vektor to){
+
+        return lookAt(from, to, new Vektor(0,1,0));
     }
 }
