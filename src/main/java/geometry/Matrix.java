@@ -4,7 +4,9 @@ public class Matrix {
 
     private double a[][] = new double[4][4];
 
-    public Matrix(){}
+    public Matrix(double[][] a){
+        this.a = a;
+    }
 
     public Matrix(double a00, double a01, double a02, double a03,
                   double a10, double a11, double a12, double a13,
@@ -56,11 +58,17 @@ public class Matrix {
         return s.toString();
     }
 
-    public static Matrix createCameraToWorldMatrix(Vektor from, Vektor forward, Vektor rigth, Vektor up){
-        return new Matrix(
-                rigth.a0, rigth.a1, rigth.a2, 0,
-                up.a0, up.a1, up.a2, 0,
-                forward.a0, forward.a1, forward.a2, 0,
-                from.a0, from.a1, from.a2, 1);
+    // static Methods
+
+    public static Matrix multiply(Matrix m1, Matrix m2){
+        double[][] product = new double[4][4];
+        for(int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                for (int k = 0; k < 4; k++) {
+                    product[i][j] += m1.a[i][k] * m2.a[k][j];
+                }
+            }
+        }
+        return new Matrix(product);
     }
 }
