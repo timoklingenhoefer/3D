@@ -2,7 +2,7 @@ package geometry;
 
 public class Vektor {
 
-    double a0, a1, a2;
+    public double a0, a1, a2;
 
     public Vektor(double a0, double a1, double a2){
         this.a0 = a0;
