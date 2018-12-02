@@ -2,7 +2,7 @@ import geometry.Matrix;
 import geometry.Quaternion;
 import geometry.Vektor;
 
-import static geometry.Matrix.multiply;
+import static geometry.Quaternion.slerp;
 import static geometry.Vektor.crossproduct;
 import static geometry.Vektor.subtract;
 
@@ -10,8 +10,10 @@ public class Renderer {
 
     public static void main(String[] args){
         //orthogonale matrix: transposition = inversion
-        Quaternion q1 = new Quaternion(1,0,0,0);
-        System.out.println(q1.normalize());
+        Quaternion q1 = new Quaternion(0.5,0.5,0.5,0.5);
+        Quaternion q2 = new Quaternion(0,4,2,1);
+        Vektor v1 = new Vektor(1,0,0);
+        System.out.println(q1.rotate(v1));
     }
 
     private static Matrix lookAt(Vektor from, Vektor to, Vektor tmp){

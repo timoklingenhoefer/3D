@@ -37,6 +37,13 @@ public class Quaternion {
         return new Quaternion(q0 * x, q1 * x, q2 * x, q3 * x);
     }
 
+    public Vektor rotate(Vektor v){
+        double v0 = (1 - 2*pow(q2,2) - 2*pow(q3,2)) * v.a0 + 2*(q1*q2 + q0*q3) * v.a1 + 2*(q1*q3 - q0*q2) * v.a2;
+        double v1 = 2*(q1*q2 - q0*q3) * v.a0 + (1 - 2*pow(q1,2) - 2*pow(q3,2)) * v.a1 + 2*(q2*q3 + q0*q1) * v.a2;
+        double v2 = 2*(q1*q3 + q0*q2) * v.a0 + 2*(q2*q3 - q0*q1) * v.a1 + (1 - 2*pow(q1,2) - 2*pow(q2,2)) * v.a2;
+        return new Vektor(v0, v1, v2);
+    }
+
     public static Quaternion slerp(Quaternion v0, Quaternion v1, double t){
         v0 = v0.normalize();
         v1 = v1.normalize();
