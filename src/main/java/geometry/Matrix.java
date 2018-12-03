@@ -39,6 +39,13 @@ public class Matrix {
                 a[0][3], a[1][3], a[2][3], a[3][3]);
     }
 
+    public Vector multVecMatix(Vector p){
+        double x = p.a0 * a[0][0] + p.a1 * a[1][0] + p.a2 * a[2][0] + a[3][0];
+        double y = p.a0 * a[0][1] + p.a1 * a[1][1] + p.a2 * a[2][1] + a[3][1];
+        double z = p.a0 * a[0][2] + p.a1 * a[1][2] + p.a2 * a[2][2] + a[3][2];
+        return new Vector(x, y, z);
+    }
+
     public String toString(){
         StringBuilder s = new StringBuilder();
         for(int i = 0;i<4;i++){
